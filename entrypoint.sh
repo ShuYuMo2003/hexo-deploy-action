@@ -104,7 +104,7 @@ with open('public/sitemap.xml', 'r') as sitemap:
         else:
             data.append('https://shuyumo2003.github.io' + temp + i)
     req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.github.io&token=${BAIDU_PUSH}', chr(10).join(data))
-    print('\n'.join(data))
+    print(chr(10).join(data))
     print(req.text)
 " > push_baidu_github.py
 
@@ -132,7 +132,7 @@ with open('public/sitemap.xml', 'r') as sitemap:
         else:
             data.append('https://shuyumo2003.gitee.io' + temp + i)
     req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.gitee.io&token=${BAIDU_PUSH}', chr(10).join(data))
-    print('\n'.join(data))
+    print(chr(10).join(data))
     print(req.text)
 " > push_baidu_gitee.py
 
