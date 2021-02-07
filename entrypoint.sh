@@ -34,14 +34,18 @@ echo "Deploy to ${PRO_REPOSITORY}"
 
 # Installs Git and jq.
 apt-get update && \
-apt-get install -y git && \
+apt-get install -y git pandoc && \
 
 # Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE 
 
-echo "npm install ..." 
+echo "npm install ... (hexo)" 
+npm install
+cd ./theme/next
+echo "npm install ... (next)" 
 npm install
 
+cd ../..
 
 echo "Clean folder ..."
 ./node_modules/hexo/bin/hexo clean

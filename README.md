@@ -1,3 +1,9 @@
+Forked from renzhaosy/hexo-deploy-action
+
+Only support my hexo blog.
+
+If you want to use it, you have to change this repo by yourself.
+
 # Hexo Deploy Action
 
 
