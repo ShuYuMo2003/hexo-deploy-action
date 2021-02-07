@@ -26,7 +26,7 @@ echo "Deploy to ${PRO_REPOSITORY}"
 
 # Installs Git and jq.
 apt-get update && \
-apt-get install -y git && \
+apt-get install -y git python-pip && \
 
 echo "installing pandoc" 
 
