@@ -48,10 +48,10 @@ echo "npm install ... (hexo)"
 npm install
 cd $GITHUB_WORKSPACE/themes/next
 echo "npm install ... (next)" 
-echo $GITHUB_WORKSPACE
+pwd
 npm install
 
-cd ../..
+cd $GITHUB_WORKSPACE
 
 echo "Clean folder ..."
 ./node_modules/hexo/bin/hexo clean
