@@ -41,8 +41,9 @@ cd $GITHUB_WORKSPACE
 
 echo "npm install ... (hexo)" 
 npm install
-cd ./theme/next
+cd $GITHUB_WORKSPACE/themes/next
 echo "npm install ... (next)" 
+echo $GITHUB_WORKSPACE
 npm install
 
 cd ../..
