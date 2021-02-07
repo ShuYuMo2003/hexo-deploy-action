@@ -43,8 +43,6 @@ echo "npm install ... (next)"
 # pwd
 npm install
 
-echo $REPOSITORY_PATH
-
 cd $GITHUB_WORKSPACE
 
 echo "Clean folder ..."
@@ -84,4 +82,60 @@ git commit --allow-empty -m "Deploying to ${BRANCH}"
 
 echo 'Start Push'
 git push origin "${BRANCH}" --force
-echo "Deployment succesful!"
+echo "Deployment succesfully!"
+
+
+echo "pushing url to baidu.(github)"
+
+cd $GITHUB_WORKSPACE
+
+echo "
+import requests
+import re
+with open('public/sitemap.xml', 'r') as sitemap:
+    pattern = re.compile(r'(?<=<loc>).+?(?=</loc>)')
+    result = pattern.findall(sitemap.read())
+    data = []
+    for i in result:
+        temp = ''
+        if(i[0] != '/'): temp = '/'
+        if(i == 'http://shuyumo2003.github.io/'):
+            data.append('https://shuyumo2003.github.io/')
+        else:
+            data.append('https://shuyumo2003.github.io' + temp + i)
+    req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.github.io&token=fh4l1mFxPzrBrRto', '\n'.join(data))
+    print('\n'.join(data))
+    print(req.text)
+" > push_baidu_github.py
+
+pip install requests
+
+python push_baidu_github.py
+
+
+echo "pushing url to baidu.(gitee)"
+
+cd $GITHUB_WORKSPACE
+
+echo "
+import requests
+import re
+with open('public/sitemap.xml', 'r') as sitemap:
+    pattern = re.compile(r'(?<=<loc>).+?(?=</loc>)')
+    result = pattern.findall(sitemap.read())
+    data = []
+    for i in result:
+        temp = ''
+        if(i[0] != '/'): temp = '/'
+        if(i == 'http://shuyumo2003.github.io/'):
+            data.append('https://shuyumo2003.gitee.io/')
+        else:
+            data.append('https://shuyumo2003.gitee.io' + temp + i)
+    req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.gitee.io&token=fh4l1mFxPzrBrRto', '\n'.join(data))
+    print('\n'.join(data))
+    print(req.text)
+" > push_baidu_gitee.py
+
+python push_baidu_gitee.py
+
+echo 'Successfully!'
