@@ -82,6 +82,7 @@ git commit --allow-empty -m "Deploying to ${BRANCH}"
 
 echo 'Start Push'
 git push origin "${BRANCH}" --force
+git push origin_ "${BRANCH}" --force
 echo "Deployment succesfully!"
 
 
