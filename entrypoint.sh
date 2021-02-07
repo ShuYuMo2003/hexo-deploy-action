@@ -67,12 +67,12 @@ git config --global user.email "githubDeployAction@QAQ.com"
 cd $PUBLISH_DIR
 echo 'Deploying...'
 
-REPOSITORY_PATH="git@github.com:ShuYuMo2003/ShuYuMo2003.github.io.git"
 
 git init
 git config user.name "${GITHUB_ACTOR}"
 git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-git remote add origin "${REPOSITORY_PATH}"
+git remote add origin git@github.com:ShuYuMo2003/ShuYuMo2003.github.io.git
+git remote add origin_ git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
 git checkout --orphan $BRANCH
 
 git add --all
