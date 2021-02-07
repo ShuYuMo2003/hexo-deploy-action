@@ -53,7 +53,6 @@ echo "Clean folder ..."
 echo "Generate file ..."
 ./node_modules/hexo/bin/hexo generate 
 
-cd $PUBLISH_DIR
 
 echo "Config git ..."
 
@@ -66,7 +65,7 @@ ssh-keyscan -t rsa github.com >>/root/.ssh/known_hosts
 git config --global user.name "githubDeployAction"
 git config --global user.email "githubDeployAction@QAQ.com"
 
-
+cd $GITHUB_WORKSPACE
 echo 'Deploying...'
 ./node_modules/hexo/bin/hexo d
 
