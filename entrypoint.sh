@@ -48,8 +48,10 @@ echo "npm install ... (hexo)"
 npm install
 cd $GITHUB_WORKSPACE/themes/next
 echo "npm install ... (next)" 
-pwd
+# pwd
 npm install
+
+echo REPOSITORY_PATH
 
 cd $GITHUB_WORKSPACE
 
