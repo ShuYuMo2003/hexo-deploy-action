@@ -34,7 +34,12 @@ echo "Deploy to ${PRO_REPOSITORY}"
 
 # Installs Git and jq.
 apt-get update && \
-apt-get install -y git pandoc && \
+apt-get install -y git && \
+
+echo "installing pandoc" 
+
+wget https://github.com/jgm/pandoc/releases/download/2.7/pandoc-2.7-1-amd64.deb
+dpkg -i ./pandoc-2.7-1-amd64.deb
 
 # Directs the action to the the Github workspace.
 cd $GITHUB_WORKSPACE 
