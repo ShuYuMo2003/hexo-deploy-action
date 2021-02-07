@@ -65,8 +65,23 @@ ssh-keyscan -t rsa github.com >>/root/.ssh/known_hosts
 git config --global user.name "githubDeployAction"
 git config --global user.email "githubDeployAction@QAQ.com"
 
-cd $GITHUB_WORKSPACE
-echo 'Deploying...'
-./node_modules/hexo/bin/hexo d
 
+cd $PUBLISH_DIR
+echo 'Deploying...'
+
+REPOSITORY_PATH="git@github.com:ShuYuMo2003/ShuYuMo2003.github.io.git"
+
+git init
+git config user.name "${GITHUB_ACTOR}"
+git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git remote add origin "${REPOSITORY_PATH}"
+git checkout --orphan $BRANCH
+
+git add --all
+
+echo 'Start Commit'
+git commit --allow-empty -m "Deploying to ${BRANCH}"
+
+echo 'Start Push'
+git push origin "${BRANCH}" --force
 echo "Deployment succesful!"
