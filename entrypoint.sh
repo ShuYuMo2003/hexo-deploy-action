@@ -21,14 +21,6 @@ then
   exit 1
 fi
 
-if [ -z "$PERSONAL_TOKEN" ]
-then
-  echo "You must provide the action with either a Personal Access Token or the GitHub Token secret in order to deploy."
-  exit 1
-fi
-
-REPOSITORY_PATH="https://x-access-token:${PERSONAL_TOKEN}@github.com/${PRO_REPOSITORY}.git"
-
 # deploy to 
 echo "Deploy to ${PRO_REPOSITORY}"
 
@@ -51,7 +43,7 @@ echo "npm install ... (next)"
 # pwd
 npm install
 
-echo REPOSITORY_PATH
+echo $REPOSITORY_PATH
 
 cd $GITHUB_WORKSPACE
 
@@ -65,28 +57,17 @@ cd $PUBLISH_DIR
 
 echo "Config git ..."
 
-# Configures Git.
-git init
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-git remote add origin "${REPOSITORY_PATH}"
+# setup key
+mkdir -p /root/.ssh/
+echo "${INPUT_DEPLOYKEY}" >/root/.ssh/id_rsa
+chmod 600 /root/.ssh/id_rsa
+ssh-keyscan -t rsa github.com >>/root/.ssh/known_hosts
 
-# Checks to see if the remote exists prior to deploying.
-# If the branch doesn't exist it gets created here as an orphan.
-# if [ "$(git ls-remote --heads "$REPOSITORY_PATH" "$BRANCH" | wc -l)" -eq 0 ];
-# then
-#   echo "Creating remote branch ${BRANCH} as it doesn't exist..."
-#   git checkout --orphan $BRANCH
-# fi
+git config --global user.name "githubDeployAction"
+git config --global user.email "githubDeployAction@QAQ.com"
 
-git checkout --orphan $BRANCH
 
-git add --all
-
-echo 'Start Commit'
-git commit --allow-empty -m "Deploying to ${BRANCH}"
-
-echo 'Start Push'
-git push origin "${BRANCH}" --force
+echo 'Deploying...'
+./node_modules/hexo/bin/hexo d
 
 echo "Deployment succesful!"
