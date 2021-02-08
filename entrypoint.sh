@@ -86,12 +86,13 @@ echo "Deployment succesfully!(github)"
 
 echo "Deploying... (gitee)"
 ssh-keyscan -t rsa gitee.com >>/root/.ssh/known_hosts
-cd $GITHUB_WORKSPACE
+mkdir $GITHUB_WORKSPACE/sync_with_gitee
+cd $GITHUB_WORKSPACE/sync_with_gitee
 git clone git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
 mv ShuYuMo2003/.git .
-rm -r ShuYuMo2003
-cp -r $PUBLISH_DIR ShuYuMo2003
-mv .git ShuYuMo2003
+rm -rf ShuYuMo2003
+cp -r $GITHUB_WORKSPACE/$PUBLISH_DIR ShuYuMo2003
+mv .git ShuYuMo2003/.git
 cd ShuYuMo2003
 git add -A
 git diff-index --quiet HEAD || git commit -m "${{ github.event.head_commit.message }}"
