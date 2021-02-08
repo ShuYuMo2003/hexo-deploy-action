@@ -89,12 +89,14 @@ echo "pushing url to baidu.(github)"
 cd $GITHUB_WORKSPACE
 
 echo "
+print('running in python srcipt')
 import requests
 import re
 with open('public/sitemap.xml', 'r') as sitemap:
     pattern = re.compile(r'(?<=<loc>).+?(?=</loc>)')
     result = pattern.findall(sitemap.read())
     data = []
+    print('read done')
     for i in result:
         temp = ''
         if(i[0] != '/'): temp = '/'
@@ -102,7 +104,9 @@ with open('public/sitemap.xml', 'r') as sitemap:
             data.append('https://shuyumo2003.github.io/')
         else:
             data.append('https://shuyumo2003.github.io' + temp + i)
+    print('posting...')
     req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.github.io&token=${BAIDU_PUSH}', chr(10).join(data))
+    print('done')
     print(chr(10).join(data))
     print(req.text)
 " > push_baidu_github.py
@@ -117,12 +121,14 @@ echo "pushing url to baidu.(gitee)"
 cd $GITHUB_WORKSPACE
 
 echo "
+print('running in python srcipt')
 import requests
 import re
 with open('public/sitemap.xml', 'r') as sitemap:
     pattern = re.compile(r'(?<=<loc>).+?(?=</loc>)')
     result = pattern.findall(sitemap.read())
     data = []
+    print('read done')
     for i in result:
         temp = ''
         if(i[0] != '/'): temp = '/'
@@ -130,7 +136,9 @@ with open('public/sitemap.xml', 'r') as sitemap:
             data.append('https://shuyumo2003.gitee.io/')
         else:
             data.append('https://shuyumo2003.gitee.io' + temp + i)
+    print('posting...')
     req = requests.post('http://data.zz.baidu.com/urls?site=https://shuyumo2003.gitee.io&token=${BAIDU_PUSH}', chr(10).join(data))
+    print('done.')
     print(chr(10).join(data))
     print(req.text)
 " > push_baidu_gitee.py
