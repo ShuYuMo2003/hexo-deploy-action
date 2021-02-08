@@ -60,6 +60,7 @@ echo "${INPUT_DEPLOYKEY}" >/root/.ssh/id_rsa
 chmod 600 /root/.ssh/id_rsa
 ssh-keyscan -t rsa github.com >>/root/.ssh/known_hosts
 
+
 git config --global user.name "githubDeployActionQWQ"
 git config --global user.email "githubDeployActionQWQ@QAQ.com"
 
@@ -84,6 +85,7 @@ git push origin "${BRANCH}" --force
 echo "Deployment succesfully!(github)"
 
 echo "Deploying... (gitee)"
+ssh-keyscan -t rsa gitee.com >>/root/.ssh/known_hosts
 cd $GITHUB_WORKSPACE
 git clone git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
 mv ShuYuMo2003/.git .
