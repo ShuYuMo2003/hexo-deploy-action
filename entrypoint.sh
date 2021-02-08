@@ -94,9 +94,10 @@ rm -rf ShuYuMo2003
 cp -r $GITHUB_WORKSPACE/$PUBLISH_DIR ShuYuMo2003
 mv .git ShuYuMo2003/.git
 cd ShuYuMo2003
+echo "repo Init done.(gitee)"
 git add -A
 git diff-index --quiet HEAD || git commit -m "${{ github.event.head_commit.message }}"
-git push -f
+git push --set-upstream origin master -f
 
 echo "Deployment succesfully!(gitee)"
 
