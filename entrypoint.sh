@@ -95,6 +95,8 @@ cp -r $GITHUB_WORKSPACE/$PUBLISH_DIR ShuYuMo2003
 mv .git ShuYuMo2003/.git
 cd ShuYuMo2003
 echo "repo Init done.(gitee)"
+echo "show files"
+ls -a
 git add -A
 git commit -m "update content by github action. QAQAQAQ~"
 echo "show files"
