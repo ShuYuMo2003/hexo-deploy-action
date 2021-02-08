@@ -96,8 +96,8 @@ mv .git ShuYuMo2003/.git
 cd ShuYuMo2003
 echo "repo Init done.(gitee)"
 git add -A
-git diff-index --quiet HEAD || git commit -m "${{ github.event.head_commit.message }}"
-git push --set-upstream origin master -f
+git commit -m "${{ github.event.head_commit.message }}"
+git push origin master -f
 
 echo "Deployment succesfully!(gitee)"
 
