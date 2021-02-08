@@ -84,29 +84,6 @@ echo 'Start Push'
 git push origin "${BRANCH}" --force
 echo "Deployment succesfully!(github)"
 
-echo "Deploying... (gitee)"
-ssh-keyscan -t rsa gitee.com >> /root/.ssh/known_hosts
-mkdir $GITHUB_WORKSPACE/sync_with_gitee
-cd $GITHUB_WORKSPACE/sync_with_gitee
-git clone git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
-mv ShuYuMo2003/.git .
-rm -rf ShuYuMo2003
-cp -r $GITHUB_WORKSPACE/$PUBLISH_DIR ShuYuMo2003
-mv .git ShuYuMo2003/.git
-cd ShuYuMo2003
-echo "repo Init done.(gitee)"
-echo "show files"
-ls -a
-git add *
-git diff-index --quiet HEAD || git commit -m "update content by github action. QAQAQAQ~"
-echo "show files"
-ls -a
-git push origin master -f
-
-echo "Deployment succesfully!(gitee)"
-
-
-
 echo "pushing url to baidu.(github)"
 
 cd $GITHUB_WORKSPACE
