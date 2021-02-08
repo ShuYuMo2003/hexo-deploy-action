@@ -43,8 +43,24 @@ echo "npm install ... (next)"
 # pwd
 npm install
 
-cd $GITHUB_WORKSPACE
 
+echo "replace gitalkID"
+
+echo "
+f = open('_config.yml', 'r').read()
+f = f.replace(    r'{{GITALK_CLIENT_ID}}', '${GITALK_CLIENT_ID}')
+f = f.replace(r'{{GITALK_CLIENT_SECRET}}', '${GITALK_CLIENT_SECRET}')
+d = open('_config.yml', 'w')
+d.write(f)
+d.flush()
+d.close()
+" > temp.py
+
+python temp.py
+
+
+
+cd $GITHUB_WORKSPACE
 echo "Clean folder ..."
 ./node_modules/hexo/bin/hexo clean
 
