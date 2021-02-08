@@ -60,19 +60,18 @@ echo "${INPUT_DEPLOYKEY}" >/root/.ssh/id_rsa
 chmod 600 /root/.ssh/id_rsa
 ssh-keyscan -t rsa github.com >>/root/.ssh/known_hosts
 
-git config --global user.name "githubDeployAction"
-git config --global user.email "githubDeployAction@QAQ.com"
+git config --global user.name "githubDeployActionQWQ"
+git config --global user.email "githubDeployActionQWQ@QAQ.com"
 
 
 cd $PUBLISH_DIR
-echo 'Deploying...'
+echo 'Deploying... (github)'
 
 
 git init
-git config user.name "${GITHUB_ACTOR}"
-git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+# git config user.name "${GITHUB_ACTOR}"
+# git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git remote add origin git@github.com:ShuYuMo2003/ShuYuMo2003.github.io.git
-git remote add origin_ git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
 git checkout --orphan $BRANCH
 
 git add --all
@@ -82,8 +81,22 @@ git commit --allow-empty -m "Deploying to ${BRANCH}"
 
 echo 'Start Push'
 git push origin "${BRANCH}" --force
-git push origin_ "${BRANCH}" --force
-echo "Deployment succesfully!"
+echo "Deployment succesfully!(github)"
+
+echo "Deploying... (gitee)"
+cd $GITHUB_WORKSPACE
+git clone git@gitee.com:ShuYuMo2003/ShuYuMo2003.git
+mv ShuYuMo2003/.git .
+rm -r ShuYuMo2003
+cp -r $PUBLISH_DIR ShuYuMo2003
+mv .git ShuYuMo2003
+cd ShuYuMo2003
+git add -A
+git diff-index --quiet HEAD || git commit -m "${{ github.event.head_commit.message }}"
+git push -f
+
+echo "Deployment succesfully!(gitee)"
+
 
 
 echo "pushing url to baidu.(github)"
