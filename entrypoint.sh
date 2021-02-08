@@ -96,7 +96,7 @@ mv .git ShuYuMo2003/.git
 cd ShuYuMo2003
 echo "repo Init done.(gitee)"
 git add -A
-git commit -m "${{ github.event.head_commit.message }}"
+git commit -m "update content by github action. QAQAQAQ~"
 git push origin master -f
 
 echo "Deployment succesfully!(gitee)"
